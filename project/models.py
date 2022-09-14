@@ -17,7 +17,7 @@ class Project(TimeStampedUUIDModel):
         blank=True,
         null=True,
         upload_to="images/",
-        default="images/default.png",
+        default="images/default.jpg",
     )
     source_link = models.CharField(
         max_length=128, verbose_name=_("source code"), blank=True, null=True
