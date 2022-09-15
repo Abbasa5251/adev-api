@@ -12,6 +12,7 @@ class Project(TimeStampedUUIDModel):
     )
     description = models.CharField(max_length=255, verbose_name=_("description"))
     body = models.TextField(verbose_name=_("body"), blank=True, null=True)
+    tags = models.ManyToManyField("Tag", blank=True)
     image = models.ImageField(
         verbose_name=_("image"),
         blank=True,
@@ -33,6 +34,14 @@ class Project(TimeStampedUUIDModel):
 
     def __str__(self):
         return self.title
+
+    @property
+    def image_url(self):
+        try:
+            url = self.image.url
+        except Exception:
+            url = ""
+        return url
 
 
 class Tag(TimeStampedUUIDModel):

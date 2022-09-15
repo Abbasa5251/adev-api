@@ -5,6 +5,7 @@ from project.models import Project, Tag
 
 class ProjectSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -15,6 +16,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "slug",
             "description",
             "body",
+            "tags",
             "image",
             "source_link",
             "demo_link",
@@ -23,8 +25,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(obj.image.url)
+        return request.build_absolute_uri(obj.image_url)
 
+    def get_tags(self, obj):
+        _tags = obj.tags.all()
+        return [tag.name for tag in _tags]
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
