@@ -23,9 +23,7 @@ class Project(TimeStampedUUIDModel):
     source_link = models.CharField(
         max_length=128, verbose_name=_("source code"), blank=True, null=True
     )
-    demo_link = models.CharField(
-        max_length=128, verbose_name=_("demo link"), blank=True, null=True
-    )
+    demo_link = models.CharField(max_length=128, verbose_name=_("demo link"), blank=True, null=True)
 
     class Meta:
         verbose_name = _("project")
