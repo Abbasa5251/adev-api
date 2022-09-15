@@ -1,5 +1,5 @@
+from .base import BASE_DIR, env
 from .base import *
-from .base import env
 
 DEBUG = True
 
