@@ -1,7 +1,8 @@
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+
 from .api.serializers import ContactSerializer
 from .models import Contact
 
@@ -19,7 +20,7 @@ from .models import Contact
     operation_id="Create Contact",
     operation_description="Create a contact",
     responses={201: ContactSerializer},
-    request_body=ContactSerializer
+    request_body=ContactSerializer,
 )
 @api_view(["GET", "POST"])
 def contact(request):

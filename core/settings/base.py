@@ -5,6 +5,7 @@ import environ
 env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+environ.Env.read_env(BASE_DIR / ".env")
 
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
@@ -85,6 +86,8 @@ SITE_ID = 1
 
 ADMIN_URL = "admin/"
 
+ADMINS = [("""Abbas Anandwala""", env("EMAIL_ADDRESS"))]
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -92,6 +95,8 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+PHONENUMBER_DEFAULT_REGION = "IN"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / "static")
