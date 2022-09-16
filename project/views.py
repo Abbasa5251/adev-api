@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .api.serializers import ProjectSerializer, ProjectDetailSerializer, TagSerializer
+from .api.serializers import ProjectDetailSerializer, ProjectSerializer, TagSerializer
 from .models import Project, Tag
 
 
@@ -29,9 +29,12 @@ def projects_list(request):
     method="GET",
     operation_id="Project Detail",
     operation_description="Get project detail",
-    parameters=openapi.Parameter('id', openapi.IN_QUERY,
-                             description="UUID for project to get detail",
-                             type=openapi.TYPE_STRING),
+    parameters=openapi.Parameter(
+        "id",
+        openapi.IN_QUERY,
+        description="UUID for project to get detail",
+        type=openapi.TYPE_STRING,
+    ),
     responses={200: ProjectDetailSerializer()},
 )
 @api_view(["GET"])
