@@ -3,12 +3,39 @@ from rest_framework import serializers
 
 from project.models import Project, Tag
 
-
-class TagsListSerializerField(serializers.ListField):
-    child = serializers.CharField()
+from .custom_tag_serializer import TagsListSerializerField
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Project
+        fields = (
+            "id",
+            "title",
+            "slug",
+            "description",
+            "tags",
+            "image",
+            "source_link",
+            "demo_link",
+        )
+        read_only_fields = ("id",)
+
+    @swagger_serializer_method(serializer_or_field=serializers.URLField)
+    def get_image(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(obj.image_url)
+
+    @swagger_serializer_method(serializer_or_field=TagsListSerializerField)
+    def get_tags(self, obj):
+        _tags = obj.tags.all()
+        return [tag.name for tag in _tags]
+
+
+class ProjectDetailSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
 

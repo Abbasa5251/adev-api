@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import projects_list, tags_list
+from . import views
 
 urlpatterns = [
-    path("", projects_list, name="projects-list"),
-    path("tags/", tags_list, name="tag-list"),
+    path("", views.projects_list, name="projects-list"),
+    path("<uuid:id>/", views.project_detail, name="project-detail"),
+    path("tags/", views.tags_list, name="tag-list"),
 ]

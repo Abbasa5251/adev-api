@@ -12,11 +12,10 @@ class Project(TimeStampedUUIDModel):
     )
     description = models.CharField(max_length=255, verbose_name=_("description"))
     body = models.TextField(verbose_name=_("body"), blank=True, null=True)
-    tags = models.ManyToManyField("Tag", blank=True)
+    tags = models.ManyToManyField("Tag", related_name="projects", blank=True)
     image = models.ImageField(
         verbose_name=_("image"),
         blank=True,
-        null=True,
         upload_to="images/",
         default="images/default.jpg",
     )
@@ -43,7 +42,7 @@ class Project(TimeStampedUUIDModel):
 
 
 class Tag(TimeStampedUUIDModel):
-    name = models.CharField(max_length=128, verbose_name=_("name"))
+    name = models.CharField(max_length=128, verbose_name=_("name"), unique=True)
 
     class Meta:
         verbose_name = _("tag")
