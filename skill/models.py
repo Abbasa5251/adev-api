@@ -6,7 +6,9 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class Skill(TimeStampedUUIDModel):
     name = models.CharField(max_length=100, verbose_name=_("name"))
-    description = models.CharField(max_length=255, verbose_name=_("description"))
+    description = models.CharField(
+        max_length=255, verbose_name=_("description"), null=True, blank=True
+    )
 
     class Meta:
         verbose_name = _("skill")
