@@ -4,16 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .api.serializers import ContactSerializer
-from .models import Contact
 
 
-@swagger_auto_schema(
-    tags=["Contact"],
-    method="GET",
-    operation_id="Contact List",
-    operation_description="List all contact",
-    responses={200: ContactSerializer},
-)
 @swagger_auto_schema(
     tags=["Contact"],
     method="POST",
@@ -24,12 +16,6 @@ from .models import Contact
 )
 @api_view(["GET", "POST"])
 def contact(request):
-    if request.method == "GET":
-        contacts = Contact.objects.all()
-        serializer = ContactSerializer(contacts, many=True, context={"request": request})
-        formatted_response = {"status": status.HTTP_200_OK, "contact": serializer.data}
-        return Response(formatted_response, status=status.HTTP_200_OK)
-
     if request.method == "POST":
         contact = request.data
         serializer = ContactSerializer(data=contact)
