@@ -1,3 +1,5 @@
+import logging
+
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
@@ -6,6 +8,8 @@ from rest_framework.response import Response
 
 from .api.serializers import ProjectDetailSerializer, ProjectSerializer, TagSerializer
 from .models import Project, Tag
+
+logger = logging.getLogger(__name__)
 
 
 @swagger_auto_schema(
@@ -21,6 +25,7 @@ def projects_list(request):
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True, context={"request": request})
         formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        logger.info(f"GET:/api/v1/projects")
         return Response(formatted_response, status=status.HTTP_200_OK)
 
 
@@ -43,6 +48,7 @@ def project_detail(request, id):
         project = Project.objects.filter(id=id).first()
         serializer = ProjectDetailSerializer(project, context={"request": request})
         formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        logger.info(f"GET:/api/v1/projects/{id}")
         return Response(formatted_response, status=status.HTTP_200_OK)
 
 
@@ -59,4 +65,5 @@ def tags_list(request):
         tags = Tag.objects.all()
         serializer = TagSerializer(tags, many=True, context={"request": request})
         formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        logger.info(f"GET:/api/v1/projects/tags")
         return Response(formatted_response, status=status.HTTP_200_OK)
