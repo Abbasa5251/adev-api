@@ -17,7 +17,7 @@ def contact_send_mail(sender, instance, created, **kwargs):
             user_message,
             settings.DEFAULT_EMAIL,
             [contact.email],
-            fail_silently=True,
+            fail_silently=False,
         )
         subject = "Someone is trying to contact on ADev Tutorials"
         message = f"There is a email from {contact.name} {contact.email}"
@@ -26,8 +26,7 @@ def contact_send_mail(sender, instance, created, **kwargs):
             message,
             settings.DEFAULT_EMAIL,
             [settings.DEFAULT_EMAIL],
-            fail_silently=True,
+            fail_silently=False,
         )
-
 
 post_save.connect(contact_send_mail, sender=Contact)
