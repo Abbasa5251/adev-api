@@ -13,6 +13,7 @@ class Project(TimeStampedUUIDModel):
     description = models.CharField(max_length=255, verbose_name=_("description"))
     body = models.TextField(verbose_name=_("body"), blank=True, null=True)
     tags = models.ManyToManyField("Tag", related_name="projects", blank=True)
+    featured = models.BooleanField(verbose_name=_("featured"), default=False)
     image = models.ImageField(
         verbose_name=_("image"),
         blank=True,
