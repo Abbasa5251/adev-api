@@ -5,9 +5,18 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class Skill(TimeStampedUUIDModel):
+    class Profiency(models.TextChoices):
+        BEGINNER = "beginner", _("beginner")
+        MODERATE = "moderate", _("moderate")
+        ADVANCE = "advance", _("advance")
+        PRO = "pro", _("pro")
+
     name = models.CharField(max_length=100, verbose_name=_("name"))
     description = models.CharField(
         max_length=255, verbose_name=_("description"), null=True, blank=True
+    )
+    proficiency = models.TextField(
+        verbose_name=_("profiency"), choices=Profiency.choices, default=Profiency.BEGINNER
     )
 
     class Meta:
