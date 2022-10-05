@@ -1,7 +1,7 @@
-from drf_yasg.utils import swagger_serializer_method
 from rest_framework import serializers
 
 from skill.models import Skill
+
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,4 +13,3 @@ class SkillSerializer(serializers.ModelSerializer):
             "proficiency",
         )
         read_only_fields = ("id",)
-

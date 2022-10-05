@@ -26,9 +26,9 @@ def contact(request):
         if serializer.is_valid():
             serializer.save()
             formatted_response = {"status": status.HTTP_201_CREATED, "contact": serializer.data}
-            logger.info(f"POST:/api/v1/contact:Contact request created")
+            logger.info(f"POST:/api/v1/contact:Contact request created : {request.user}")
             return Response(formatted_response, status=status.HTTP_201_CREATED)
 
         formatted_response = {"status": status.HTTP_400_BAD_REQUEST, "error": serializer.errors}
-        logger.error(f"POST:/api/v1/contact:There was an error creating contact")
+        logger.error(f"POST:/api/v1/contact:There was an error creating contact : {request.user}")
         return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
