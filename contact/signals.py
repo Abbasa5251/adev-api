@@ -29,4 +29,5 @@ def contact_send_mail(sender, instance, created, **kwargs):
             fail_silently=False,
         )
 
+
 post_save.connect(contact_send_mail, sender=Contact)

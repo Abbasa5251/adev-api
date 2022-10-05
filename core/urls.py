@@ -1,6 +1,7 @@
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,6 +27,7 @@ urlpatterns = [
     path("api/v1/projects/", include("project.urls")),
     path("api/v1/contact/", include("contact.urls")),
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
