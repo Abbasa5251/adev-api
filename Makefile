@@ -23,10 +23,10 @@ black:
 	black .
 
 isort-check:
-	isort . --check-only --skip venv --skip migrations
+	isort . --check-only --skip venv --skip .venv --skip migrations
 
 isort-diff:
-	isort . --diff --skip venv --skip migrations
+	isort . --diff --skip venv --skip .venv --skip migrations
 
 isort:
-	isort . --skip venv --skip migrations	
+	isort . --skip venv --skip .venv --skip migrations	
