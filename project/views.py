@@ -28,7 +28,7 @@ def projects_list(request):
         projects = Project.objects.all()
         projects = paginator.paginate_queryset(projects, request)
         serializer = ProjectSerializer(projects, many=True, context={"request": request})
-        formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        formatted_response = {"status": status.HTTP_200_OK, "data": serializer.data}
         logger.info(f"GET:/api/v1/projects : {request.user}")
         return Response(formatted_response, status=status.HTTP_200_OK)
 
@@ -51,7 +51,7 @@ def project_detail(request, id):
     if request.method == "GET":
         project = Project.objects.filter(id=id).first()
         serializer = ProjectDetailSerializer(project, context={"request": request})
-        formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        formatted_response = {"status": status.HTTP_200_OK, "data": serializer.data}
         logger.info(f"GET:/api/v1/projects/{id} : {request.user}")
         return Response(formatted_response, status=status.HTTP_200_OK)
 
@@ -68,6 +68,6 @@ def tags_list(request):
     if request.method == "GET":
         tags = Tag.objects.all()
         serializer = TagSerializer(tags, many=True, context={"request": request})
-        formatted_response = {"status": status.HTTP_200_OK, "result": serializer.data}
+        formatted_response = {"status": status.HTTP_200_OK, "data": serializer.data}
         logger.info(f"GET:/api/v1/projects/tags : {request.user}")
         return Response(formatted_response, status=status.HTTP_200_OK)
