@@ -22,7 +22,6 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
-    "drf_yasg",
     "djcelery_email",
     "phonenumber_field",
 ]
@@ -32,7 +31,6 @@ LOCAL_APPS = [
     "project.apps.ProjectConfig",
     "skill.apps.SkillConfig",
     "contact.apps.ContactConfig",
-    "about.apps.AboutConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
