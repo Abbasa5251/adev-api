@@ -1,7 +1,5 @@
 import logging
 
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,13 +10,6 @@ from .models import Skill
 logger = logging.getLogger(__name__)
 
 
-@swagger_auto_schema(
-    tags=["Skill"],
-    method="GET",
-    operation_id="Skills List",
-    operation_description="List all skills",
-    responses={200: SkillSerializer(many=True)},
-)
 @api_view(["GET"])
 def skills_list(request):
     if request.method == "GET":
@@ -29,19 +20,6 @@ def skills_list(request):
         return Response(formatted_response, status=status.HTTP_200_OK)
 
 
-@swagger_auto_schema(
-    tags=["Skill"],
-    method="GET",
-    operation_id="Skill Detail",
-    operation_description="Get skill detail",
-    parameters=openapi.Parameter(
-        "id",
-        openapi.IN_QUERY,
-        description="UUID for skill to get detail",
-        type=openapi.TYPE_STRING,
-    ),
-    responses={200: SkillSerializer()},
-)
 @api_view(["GET"])
 def skill_detail(request, id):
     if request.method == "GET":

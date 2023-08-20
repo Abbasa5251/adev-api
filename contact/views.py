@@ -1,6 +1,5 @@
 import logging
 
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,14 +9,6 @@ from .api.serializers import ContactSerializer
 logger = logging.getLogger(__name__)
 
 
-@swagger_auto_schema(
-    tags=["Contact"],
-    method="POST",
-    operation_id="Create Contact",
-    operation_description="Create a contact",
-    responses={201: ContactSerializer},
-    request_body=ContactSerializer,
-)
 @api_view(["POST"])
 def contact(request):
     if request.method == "POST":
